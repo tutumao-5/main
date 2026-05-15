@@ -14,7 +14,7 @@ const stepsData: StepData[] = [
   {
     step: 0,
     title: "准备开始",
-    desc: "同学们，还记得我们的停车费规则吗？一起来把表格变成神奇的函数图像吧！",
+    desc: "同学们，今天我们要学习一个新的计费规则：前2小时只需5元，之后每小时增加10元。看看它对应的函数图像是什么样的？",
     formula: "",
     summaryTitle: "",
     summaryFormula: "",
@@ -22,62 +22,53 @@ const stepsData: StepData[] = [
   },
   {
     step: 1,
-    title: "第一段：免费时间",
-    desc: "0 到 15分钟内，一分钱都不用花！",
-    formula: "停车费 = 0元  (0 - 15分钟)",
-    summaryTitle: "0 - 15分钟",
-    summaryFormula: "停车费 = 0元 (0 - 15分钟)",
-    color: "text-green-600"
-  },
-  {
-    step: 2,
-    title: "第二段：起步价",
-    desc: "超过15分钟，但在 2小时内，都是一口价 5元哦。这是一条平平的线段！",
-    formula: "停车费 = 5元  (15分钟 < 时间 ≤ 2小时)",
-    summaryTitle: "15分钟 - 2小时",
+    title: "第一段：基础计费",
+    desc: "只要是在 2小时以内（包含2小时），停车费都是统一的 5元。图像上是一条水平线段！",
+    formula: "停车费 = 5元  (0 < 时间 ≤ 2小时)",
+    summaryTitle: "0 - 2小时",
     summaryFormula: "停车费 = 5元",
     color: "text-blue-600"
   },
   {
-    step: 3,
-    title: "第三段：超过2小时啦！",
-    desc: "2到3小时之间（哪怕只超了1分钟），按3小时算（进一取整）。所以是 (3-2)×10 + 5 = 15元！",
-    formula: "停车费 = 15元  (2小时 < 时间 ≤ 3小时)",
+    step: 2,
+    title: "第二段：2小时后递增",
+    desc: "超过2小时后，每小时需要增加 10元。如果是2小时多一点，按3小时算，也就是 5 + 10 = 15元！",
+    formula: "停车费 = 5 + 10 = 15元  (2小时 < 时间 ≤ 3小时)",
     summaryTitle: "2 - 3小时",
     summaryFormula: "停车费 = 15元",
     color: "text-orange-500"
   },
   {
-    step: 4,
-    title: "第四段：3到4小时",
-    desc: "3到4小时之间，进一取整按4小时算。计算方法：(4-2)×10 + 5 = 25元！",
+    step: 3,
+    title: "第三段：3到4小时",
+    desc: "以此类推，3到4小时之间，按4小时计费。也就是基础5元 + 2个增量(20元) = 25元！",
     formula: "停车费 = 25元  (3小时 < 时间 ≤ 4小时)",
     summaryTitle: "3 - 4小时",
     summaryFormula: "停车费 = 25元",
     color: "text-red-500"
   },
   {
-    step: 5,
-    title: "第五段：4到5小时",
-    desc: "4到5小时之间，进一取整按5小时算。计算方法：(5-2)×10 + 5 = 35元！规律你发现了吗？",
+    step: 4,
+    title: "第四段：4到5小时",
+    desc: "继续增加！4到5小时，计费5小时。5 + 30 = 35元！规律越来越清楚了对吗？",
     formula: "停车费 = 35元  (4小时 < 时间 ≤ 5小时)",
     summaryTitle: "4 - 5小时",
     summaryFormula: "停车费 = 35元",
     color: "text-purple-600"
   },
   {
-    step: 6,
-    title: "第六段：5到6小时",
-    desc: "5到6小时之间，进一取整按6小时算。计算方法：(6-2)×10 + 5 = 45元！",
+    step: 5,
+    title: "第五段：5到6小时",
+    desc: "5到6小时之间，计费6小时。5 + 40 = 45元！",
     formula: "停车费 = 45元  (5小时 < 时间 ≤ 6小时)",
     summaryTitle: "5 - 6小时",
     summaryFormula: "停车费 = 45元",
     color: "text-rose-600"
   },
   {
-    step: 7,
+    step: 6,
     title: "提炼总结计算方法",
-    desc: "让我们把停车费的计算规则总结成一棵明晰的“智慧树”吧！",
+    desc: "现在我们把这个“基础价+阶梯增量”的规则总结成智慧树吧！",
     formula: "",
     summaryTitle: "",
     summaryFormula: "",
@@ -101,31 +92,21 @@ function TreeDiagram() {
         {/* Branch 1 */}
         <div className="flex items-center gap-4 relative">
           <div className="absolute -left-12 top-1/2 w-12 h-1 bg-indigo-200" />
-          <div className="bg-green-100 border-2 border-green-200 px-6 py-4 rounded-xl shadow-sm whitespace-nowrap">
-            <span className="text-2xl font-bold text-green-700">≤ 15 分钟</span>
+          <div className="bg-blue-100 border-2 border-blue-200 px-6 py-4 rounded-xl shadow-sm whitespace-nowrap">
+            <span className="text-2xl font-bold text-blue-700">≤ 2 小时</span>
             <span className="mx-4 text-2xl font-black text-gray-400">——</span>
-            <span className="text-3xl font-black text-green-600 italic">免费</span>
+            <span className="text-3xl font-black text-blue-600">5 元</span>
           </div>
         </div>
 
         {/* Branch 2 */}
         <div className="flex items-center gap-4 relative">
           <div className="absolute -left-12 top-1/2 w-12 h-1 bg-indigo-200" />
-          <div className="bg-blue-100 border-2 border-blue-200 px-6 py-4 rounded-xl shadow-sm whitespace-nowrap">
-            <span className="text-2xl font-bold text-blue-700">≤ 2 小时内</span>
-            <span className="mx-4 text-2xl font-black text-gray-400">——</span>
-            <span className="text-3xl font-black text-blue-600">5 元</span>
-          </div>
-        </div>
-
-        {/* Branch 3 */}
-        <div className="flex items-center gap-4 relative">
-          <div className="absolute -left-12 top-1/2 w-12 h-1 bg-indigo-200" />
           <div className="bg-orange-100 border-2 border-orange-200 px-6 py-4 rounded-xl shadow-sm whitespace-nowrap">
             <span className="text-2xl font-bold text-orange-700">＞ 2 小时</span>
             <span className="mx-4 text-2xl font-black text-gray-400">——</span>
             <span className="text-2xl xl:text-3xl font-black text-orange-600">
-              (小时数 - 2) × 10 + 5
+              5 + (小时数 - 2) × 10
             </span>
           </div>
         </div>
@@ -152,13 +133,13 @@ export default function App() {
   const getY = (val: number) => svgHeight - padding.bottom - (val / maxY) * (svgHeight - padding.top - padding.bottom);
 
   const handleNext = () => {
-    // 特殊逻辑：第3步的子步骤
-    if (currentStep === 3 && subStep < 5) {
+    // 特殊逻辑：第2步的子步骤 (2-3小时)
+    if (currentStep === 2 && subStep < 4) {
       setSubStep(prev => prev + 1);
       return;
     }
 
-    if (currentStep < 7) {
+    if (currentStep < 6) {
       setCurrentStep(prev => prev + 1);
       setSubStep(0);
       setIsRevealed(false);
@@ -166,16 +147,16 @@ export default function App() {
   };
 
   const handlePrev = () => {
-    // 特殊逻辑：第3步的子步骤
-    if (currentStep === 3 && subStep > 0) {
+    // 特殊逻辑：第2步的子步骤
+    if (currentStep === 2 && subStep > 0) {
       setSubStep(prev => prev - 1);
       return;
     }
 
     if (currentStep > 0) {
       setCurrentStep(prev => prev - 1);
-      // 如果回退到第3步，默认显示最后的完整线段
-      setSubStep(currentStep - 1 === 3 ? 5 : 0);
+      // 如果回退到第2步，默认显示最后的完整线段
+      setSubStep(currentStep - 1 === 2 ? 4 : 0);
       setIsRevealed(false);
     }
   };
@@ -195,11 +176,11 @@ export default function App() {
           <div className="lg:w-[55%] flex flex-col">
             <div className="text-center mb-3">
               <h1 className="text-4xl font-bold text-gray-800 tracking-wider">
-                {currentStep === 7 ? "停车费计算方法汇总" : "停车费与时间的“阶梯”秘密"}
+                {currentStep === 6 ? "停车费计算方法汇总" : "停车费与时间的“阶梯”秘密"}
               </h1>
             </div>
 
-            {currentStep < 7 && (
+            {currentStep < 6 && (
               <div className="flex justify-center items-center gap-8 mb-4 bg-white py-2 px-6 rounded-full border-2 border-blue-100 shadow-sm mx-auto w-fit">
                 <span className="text-xl font-bold text-gray-700">图例：</span>
                 <div className="flex items-center gap-2">
@@ -213,9 +194,9 @@ export default function App() {
               </div>
             )}
 
-            {/* 内容区：如果是第7步则显示树状图，否则显示SVG */}
+            {/* 内容区：如果是第6步则显示树状图，否则显示SVG */}
             <div className={`relative bg-gray-50 rounded-2xl border-2 border-gray-200 overflow-hidden shadow-inner min-h-[500px] flex items-center justify-center`}>
-              {currentStep === 7 ? (
+              {currentStep === 6 ? (
                 <TreeDiagram />
               ) : (
                 <svg 
@@ -250,78 +231,53 @@ export default function App() {
                   <text key={`x-${val}`} x={getX(val)} y={getY(0) + 25} fontSize="20" fill="#4b5563" textAnchor="middle" fontWeight="bold">{val}</text>
                 ))}
 
-                {/* 特殊刻度 0.25 (15分钟) */}
-                {currentStep >= 1 && (
-                  <g>
-                    <text x={getX(0.25)} y={getY(0) + 45} fontSize="18" fill="#16a34a" textAnchor="middle" fontWeight="bold">15分钟</text>
-                    <line x1={getX(0.25)} y1={getY(0)} x2={getX(0.25)} y2={getY(0) + 5} stroke="#16a34a" strokeWidth="2" />
-                  </g>
-                )}
-
                 {/* Y 轴刻度 */}
                 {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50].map(val => (
                   <text key={`y-${val}`} x={padding.left - 15} y={getY(val) + 6} fontSize="20" fill="#4b5563" textAnchor="end" fontWeight="bold">{val}</text>
                 ))}
 
-                {/* 第1段: 0 - 0.25 */}
+                {/* 第1段: 0 - 2 */}
                 {currentStep >= 1 && (
                   <g className="draw-line">
-                    <line x1={getX(0)} y1={getY(0)} x2={getX(0.25)} y2={getY(0)} stroke="#16a34a" strokeWidth="6" strokeLinecap="round" />
-                    <circle cx={getX(0.25)} cy={getY(0)} r="6" fill="#16a34a" />
-                    <text x={getX(0.125)} y={getY(0) - 15} fontSize="20" fill="#16a34a" textAnchor="middle" fontWeight="bold">0元</text>
-                  </g>
-                )}
-
-                {/* 第2段: 0.25 - 2 */}
-                {currentStep >= 2 && (
-                  <g className="draw-line">
-                    <line x1={getX(0.25)} y1={getY(0)} x2={getX(0.25)} y2={getY(5)} stroke="#3b82f6" strokeWidth="2" strokeDasharray="6,6" opacity="0.5" />
-                    <line x1={getX(0.25)} y1={getY(5)} x2={getX(2)} y2={getY(5)} stroke="#3b82f6" strokeWidth="6" strokeLinecap="round" />
-                    <circle cx={getX(0.25)} cy={getY(5)} r="7" fill="white" stroke="#3b82f6" strokeWidth="3" />
+                    <line x1={getX(0)} y1={getY(5)} x2={getX(2)} y2={getY(5)} stroke="#3b82f6" strokeWidth="6" strokeLinecap="round" />
                     <circle cx={getX(2)} cy={getY(5)} r="6" fill="#3b82f6" />
                     <text x={getX(1)} y={getY(5) - 15} fontSize="20" fill="#3b82f6" textAnchor="middle" fontWeight="bold">5元</text>
                   </g>
                 )}
 
-                {/* 第3段: 2 - 3 (特殊逐点显示逻辑) */}
-                {currentStep >= 3 && (
+                {/* 第2段: 2 - 3 (特殊逐点显示逻辑) */}
+                {currentStep >= 2 && (
                   <g className="draw-line">
                     <line x1={getX(2)} y1={getY(5)} x2={getX(2)} y2={getY(15)} stroke="#f97316" strokeWidth="2" strokeDasharray="6,6" opacity="0.5" />
                     
-                    {/* 子步骤 1: 2小时15分钟 */}
-                    {(subStep >= 1 || currentStep > 3) && (
-                      <>
-                        <circle cx={getX(2.25)} cy={getY(15)} r="6" fill="#f97316" className="animate-pulse" />
-                        <text x={getX(2.25)} y={getY(15) - 20} fontSize="14" fill="#f97316" textAnchor="middle" fontWeight="bold">2:15</text>
-                      </>
-                    )}
-
-                    {/* 子步骤 2: 2小时30分钟 */}
-                    {(subStep >= 2 || currentStep > 3) && (
+                    {/* 子步骤 1: 2小时30分钟 (旧版点，新版根据需求标2:30, 2:45) */}
+                    {(subStep >= 1 || currentStep > 2) && (
                       <>
                         <circle cx={getX(2.5)} cy={getY(15)} r="6" fill="#f97316" className="animate-pulse" />
-                        <text x={getX(2.5)} y={getY(15) - 20} fontSize="14" fill="#f97316" textAnchor="middle" fontWeight="bold">2:30</text>
+                        <line x1={getX(2.5)} y1={getY(15)} x2={getX(2.5)} y2={getY(15) - 12} stroke="#f97316" strokeWidth="1" />
+                        <text x={getX(2.5)} y={getY(15) - 15} fontSize="14" fill="#f97316" textAnchor="middle" fontWeight="bold">2:30</text>
                       </>
                     )}
 
-                    {/* 子步骤 3: 2小时45分钟 */}
-                    {(subStep >= 3 || currentStep > 3) && (
+                    {/* 子步骤 2: 2小时45分钟 */}
+                    {(subStep >= 2 || currentStep > 2) && (
                       <>
                         <circle cx={getX(2.75)} cy={getY(15)} r="6" fill="#f97316" className="animate-pulse" />
-                        <text x={getX(2.75)} y={getY(15) - 20} fontSize="14" fill="#f97316" textAnchor="middle" fontWeight="bold">2:45</text>
+                        <line x1={getX(2.75)} y1={getY(15)} x2={getX(2.75)} y2={getY(15) - 37} stroke="#f97316" strokeWidth="1" />
+                        <text x={getX(2.75)} y={getY(15) - 40} fontSize="14" fill="#f97316" textAnchor="middle" fontWeight="bold">2:45</text>
                       </>
                     )}
 
-                    {/* 子步骤 4: 3小时 */}
-                    {(subStep >= 4 || currentStep > 3) && (
+                    {/* 子步骤 3: 3小时 */}
+                    {(subStep >= 3 || currentStep > 2) && (
                       <>
                         <circle cx={getX(3)} cy={getY(15)} r="6" fill="#f97316" className="animate-pulse" />
                         <text x={getX(3)} y={getY(15) - 20} fontSize="14" fill="#f97316" textAnchor="middle" fontWeight="bold">3:00</text>
                       </>
                     )}
 
-                    {/* 子步骤 5: 完整线段 */}
-                    {(subStep >= 5 || currentStep > 3) && (
+                    {/* 子步骤 4: 完整线段 */}
+                    {(subStep >= 4 || currentStep > 2) && (
                       <>
                         <line x1={getX(2)} y1={getY(15)} x2={getX(3)} y2={getY(15)} stroke="#f97316" strokeWidth="6" strokeLinecap="round" />
                         <circle cx={getX(2)} cy={getY(15)} r="7" fill="white" stroke="#f97316" strokeWidth="3" />
@@ -332,8 +288,8 @@ export default function App() {
                   </g>
                 )}
 
-                {/* 第4段: 3 - 4 */}
-                {currentStep >= 4 && (
+                {/* 第3段: 3 - 4 */}
+                {currentStep >= 3 && (
                   <g className="draw-line">
                     <line x1={getX(3)} y1={getY(15)} x2={getX(3)} y2={getY(25)} stroke="#ef4444" strokeWidth="2" strokeDasharray="6,6" opacity="0.5" />
                     <line x1={getX(3)} y1={getY(25)} x2={getX(4)} y2={getY(25)} stroke="#ef4444" strokeWidth="6" strokeLinecap="round" />
@@ -343,8 +299,8 @@ export default function App() {
                   </g>
                 )}
 
-                {/* 第5段: 4 - 5 */}
-                {currentStep >= 5 && (
+                {/* 第4段: 4 - 5 */}
+                {currentStep >= 4 && (
                   <g className="draw-line">
                     <line x1={getX(4)} y1={getY(25)} x2={getX(4)} y2={getY(35)} stroke="#9333ea" strokeWidth="2" strokeDasharray="6,6" opacity="0.5" />
                     <line x1={getX(4)} y1={getY(35)} x2={getX(5)} y2={getY(35)} stroke="#9333ea" strokeWidth="6" strokeLinecap="round" />
@@ -354,8 +310,8 @@ export default function App() {
                   </g>
                 )}
 
-                {/* 第6段: 5 - 6 */}
-                {currentStep >= 6 && (
+                {/* 第5段: 5 - 6 */}
+                {currentStep >= 5 && (
                   <g className="draw-line">
                     <line x1={getX(5)} y1={getY(35)} x2={getX(5)} y2={getY(45)} stroke="#e11d48" strokeWidth="2" strokeDasharray="6,6" opacity="0.5" />
                     <line x1={getX(5)} y1={getY(45)} x2={getX(6)} y2={getY(45)} stroke="#e11d48" strokeWidth="6" strokeLinecap="round" />
@@ -369,7 +325,7 @@ export default function App() {
             </div>
 
             {/* 已揭晓规律汇总列表 (仅在非最后一步显示) */}
-            {currentStep < 7 && stepsData.filter(data => data.step > 0 && (data.step < currentStep || (data.step === currentStep && isRevealed))).length > 0 && (
+            {currentStep < 6 && stepsData.filter(data => data.step > 0 && (data.step < currentStep || (data.step === currentStep && isRevealed))).length > 0 && (
               <div className="mt-6 bg-gray-50 p-4 rounded-2xl border-2 border-gray-200 shadow-inner">
                 <h3 className="text-xl font-bold text-gray-700 mb-3 flex items-center gap-2">
                   📝 已总结的计费规律：
@@ -388,7 +344,7 @@ export default function App() {
 
           {/* 右侧：教师控制台与原理解释 */}
           <div className="w-full lg:w-[45%] flex flex-col gap-6">
-            {currentStep === 7 ? (
+            {currentStep === 6 ? (
               <div className="flex-1 flex flex-col items-center justify-center gap-8 bg-indigo-50 rounded-2xl border-2 border-indigo-100 p-8 animate-fade-in">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-indigo-800 mb-4">推导已完成！</h3>
@@ -415,8 +371,8 @@ export default function App() {
                     </button>
                     <button 
                       onClick={handleNext}
-                      disabled={currentStep === 7}
-                      className={`py-4 px-2 rounded-xl text-2xl font-bold transition-all shadow-md active:scale-95 ${currentStep === 7 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-lg'}`}
+                      disabled={currentStep === 6}
+                      className={`py-4 px-2 rounded-xl text-2xl font-bold transition-all shadow-md active:scale-95 ${currentStep === 6 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-lg'}`}
                     >
                       下一步 ➡️
                     </button>
@@ -436,25 +392,25 @@ export default function App() {
                   <div className={`transition-opacity duration-500 ${stepsData[currentStep].color}`}>
                     <h3 className="text-3xl font-black mb-4">
                       {stepsData[currentStep].title}
-                      {currentStep === 3 && subStep > 0 && subStep < 5 && (
+                      {currentStep === 2 && subStep > 0 && subStep < 4 && (
                         <span className="ml-4 text-2xl text-gray-500">
-                          (探究中: {subStep === 1 ? "2:15" : subStep === 2 ? "2:30" : subStep === 3 ? "2:45" : "3:00"})
+                          (探究中: {subStep === 1 ? "2:30" : subStep === 2 ? "2:45" : "3:00"})
                         </span>
                       )}
                     </h3>
                     
-                    {currentStep === 0 || isRevealed || (currentStep === 3 && subStep > 0) ? (
+                    {currentStep === 0 || isRevealed || (currentStep === 2 && subStep > 0) ? (
                       <div className="animate-fade-in">
                         <p className="text-2xl leading-relaxed font-medium mb-6 text-gray-700">
-                          {currentStep === 3 && subStep > 0 && subStep < 5 
-                            ? `看，即使时间只超过了一点点（比如${subStep === 1 ? "2小时15分钟" : subStep === 2 ? "2小时30分钟" : subStep === 3 ? "2小时45分钟" : "3小时00分钟"}），费用也会固定在 15 元。`
+                          {currentStep === 2 && subStep > 0 && subStep < 4 
+                            ? `即使时间只是超过2小时一点点（如${subStep === 1 ? "2小时30分钟" : subStep === 2 ? "2小时45分钟" : "3小时00分钟"}），按规则都要算作3小时。`
                             : stepsData[currentStep].desc}
                         </p>
-                        {(stepsData[currentStep].formula || (currentStep === 3 && subStep > 0)) && (
+                        {(stepsData[currentStep].formula || (currentStep === 2 && subStep > 0)) && (
                           <div className="bg-white p-4 rounded-xl border border-dashed border-gray-400 shadow-sm flex justify-center items-center">
                             <p className="text-lg xl:text-2xl font-mono font-bold whitespace-nowrap text-center">
-                              {currentStep === 3 && subStep > 0 && subStep < 5 
-                                ? `停车费 = 15元`
+                              {currentStep === 2 && subStep > 0 && subStep < 4 
+                                ? `计费时长 = 3小时，停车费 = 15元`
                                 : stepsData[currentStep].formula}
                             </p>
                           </div>
