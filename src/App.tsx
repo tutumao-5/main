@@ -172,36 +172,36 @@ export default function App() {
       <div className="w-full max-w-7xl">
         <div className="bg-white rounded-3xl shadow-2xl p-6 w-full flex flex-col lg:flex-row gap-8 border-4 border-green-100">
 
-          {/* 左侧：内容显示区 */}
-          <div className="lg:w-[55%] flex flex-col">
+          {/* 左侧：内容显示区 (放大比例) */}
+          <div className="lg:w-[75%] flex flex-col">
             <div className="text-center mb-3">
-              <h1 className="text-4xl font-bold text-gray-800 tracking-wider">
+              <h1 className="text-5xl font-extrabold text-gray-800 tracking-wider mb-2">
                 {currentStep === 6 ? "停车费计算方法汇总" : "停车费与时间的“阶梯”秘密"}
               </h1>
             </div>
 
             {currentStep < 6 && (
-              <div className="flex justify-center items-center gap-8 mb-4 bg-white py-2 px-6 rounded-full border-2 border-blue-100 shadow-sm mx-auto w-fit">
-                <span className="text-xl font-bold text-gray-700">图例：</span>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-blue-600"></div>
-                  <span className="text-lg text-gray-700">实心点：<b>包含</b>该时间</span>
+              <div className="flex justify-center items-center gap-8 mb-6 bg-white py-3 px-8 rounded-full border-2 border-blue-100 shadow-sm mx-auto w-fit">
+                <span className="text-2xl font-bold text-gray-700">图例：</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-blue-600"></div>
+                  <span className="text-xl text-gray-700">实心点：<b>包含</b>该时间</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full border-4 border-blue-600 bg-white"></div>
-                  <span className="text-lg text-gray-700">空心点：<b>不包含</b>该时间</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full border-4 border-blue-600 bg-white"></div>
+                  <span className="text-xl text-gray-700">空心点：<b>不包含</b>该时间</span>
                 </div>
               </div>
             )}
 
             {/* 内容区：如果是第6步则显示树状图，否则显示SVG */}
-            <div className={`relative bg-gray-50 rounded-2xl border-2 border-gray-200 overflow-hidden shadow-inner min-h-[500px] flex items-center justify-center`}>
+            <div className={`relative bg-gray-50 rounded-3xl border-2 border-gray-200 overflow-hidden shadow-inner min-h-[600px] flex items-center justify-center`}>
               {currentStep === 6 ? (
                 <TreeDiagram />
               ) : (
                 <svg 
                   viewBox={`0 0 ${svgWidth} ${svgHeight}`} 
-                  className="w-full h-auto drop-shadow-md"
+                  className="w-full h-full p-4 drop-shadow-md"
                 >
                 {/* 绘制网格背景 */}
                 {[10, 20, 30, 40, 50].map(y => (
@@ -342,92 +342,55 @@ export default function App() {
             )}
           </div>
 
-          {/* 右侧：教师控制台与原理解释 */}
-          <div className="w-full lg:w-[45%] flex flex-col gap-6">
+          {/* 右侧：仅放置教师操作台 (居中布局) */}
+          <div className="w-full lg:w-[25%] flex flex-col justify-start items-center pt-10 gap-8">
             {currentStep === 6 ? (
-              <div className="flex-1 flex flex-col items-center justify-center gap-8 bg-indigo-50 rounded-2xl border-2 border-indigo-100 p-8 animate-fade-in">
+              <div className="w-full flex flex-col items-center justify-center gap-10 bg-indigo-50 rounded-3xl border-2 border-indigo-100 p-10 animate-fade-in shadow-lg">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-indigo-800 mb-4">推导已完成！</h3>
-                  <p className="text-gray-600 text-lg">您可以返回上一步重新查看函数图像</p>
+                  <h3 className="text-3xl font-black text-indigo-800 mb-4">推导已完成！</h3>
+                  <p className="text-gray-600 text-xl">点击返回按钮重新探究图像</p>
                 </div>
                 <button 
                   onClick={handlePrev}
-                  className="group flex items-center gap-4 py-6 px-10 rounded-2xl text-3xl font-black bg-white text-indigo-600 border-4 border-indigo-200 shadow-xl hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all active:scale-95"
+                  className="group flex items-center gap-4 py-8 px-12 rounded-3xl text-4xl font-black bg-white text-indigo-600 border-4 border-indigo-200 shadow-2xl hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all active:scale-95"
                 >
                   <span className="group-hover:-translate-x-2 transition-transform">⬅️</span>
                   返回图表
                 </button>
               </div>
             ) : (
-              <>
-                <div className="bg-indigo-50 p-6 rounded-2xl border-2 border-indigo-100">
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <button 
-                      onClick={handlePrev}
-                      disabled={currentStep === 0}
-                      className={`py-4 px-2 rounded-xl text-2xl font-bold transition-all shadow-md active:scale-95 ${currentStep === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white text-indigo-600 border-2 border-indigo-200 hover:bg-indigo-100'}`}
-                    >
-                      ⬅️ 上一步
-                    </button>
+              <div className="w-full flex flex-col gap-8">
+                <div className="bg-indigo-50 p-8 rounded-3xl border-2 border-indigo-100 shadow-md">
+                  <div className="grid grid-cols-1 gap-6 mb-6">
                     <button 
                       onClick={handleNext}
                       disabled={currentStep === 6}
-                      className={`py-4 px-2 rounded-xl text-2xl font-bold transition-all shadow-md active:scale-95 ${currentStep === 6 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-lg'}`}
+                      className={`py-8 px-4 rounded-2xl text-4xl font-black transition-all shadow-xl active:scale-95 flex items-center justify-center gap-4 ${currentStep === 6 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-2xl'}`}
                     >
                       下一步 ➡️
+                    </button>
+                    <button 
+                      onClick={handlePrev}
+                      disabled={currentStep === 0}
+                      className={`py-6 px-4 rounded-2xl text-2xl font-bold transition-all shadow-md active:scale-95 flex items-center justify-center gap-3 ${currentStep === 0 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white text-indigo-600 border-2 border-indigo-200 hover:bg-indigo-50'}`}
+                    >
+                      ⬅️ 上一步
                     </button>
                   </div>
 
                   <button 
                     onClick={handleReset}
-                    className="w-full py-3 rounded-xl text-xl font-bold bg-rose-100 text-rose-600 hover:bg-rose-200 transition-all"
+                    className="w-full py-4 rounded-2xl text-xl font-bold bg-rose-100 text-rose-600 hover:bg-rose-200 transition-all shadow-sm border border-rose-200"
                   >
                     🔄 重新开始推导
                   </button>
                 </div>
 
-                <div className="flex-1 bg-yellow-50 p-6 rounded-2xl border-2 border-yellow-200 flex flex-col justify-center">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-6">当前规律总结：</h2>
-                  
-                  <div className={`transition-opacity duration-500 ${stepsData[currentStep].color}`}>
-                    <h3 className="text-3xl font-black mb-4">
-                      {stepsData[currentStep].title}
-                      {currentStep === 2 && subStep > 0 && subStep < 4 && (
-                        <span className="ml-4 text-2xl text-gray-500">
-                          (探究中: {subStep === 1 ? "2:30" : subStep === 2 ? "2:45" : "3:00"})
-                        </span>
-                      )}
-                    </h3>
-                    
-                    {currentStep === 0 || isRevealed || (currentStep === 2 && subStep > 0) ? (
-                      <div className="animate-fade-in">
-                        <p className="text-2xl leading-relaxed font-medium mb-6 text-gray-700">
-                          {currentStep === 2 && subStep > 0 && subStep < 4 
-                            ? `即使时间只是超过2小时一点点（如${subStep === 1 ? "2小时30分钟" : subStep === 2 ? "2小时45分钟" : "3小时00分钟"}），按规则都要算作3小时。`
-                            : stepsData[currentStep].desc}
-                        </p>
-                        {(stepsData[currentStep].formula || (currentStep === 2 && subStep > 0)) && (
-                          <div className="bg-white p-4 rounded-xl border border-dashed border-gray-400 shadow-sm flex justify-center items-center">
-                            <p className="text-lg xl:text-2xl font-mono font-bold whitespace-nowrap text-center">
-                              {currentStep === 2 && subStep > 0 && subStep < 4 
-                                ? `计费时长 = 3小时，停车费 = 15元`
-                                : stepsData[currentStep].formula}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div 
-                        onClick={() => setIsRevealed(true)}
-                        className="bg-white p-8 rounded-xl border-4 border-dashed border-gray-300 shadow-sm cursor-pointer hover:bg-yellow-100 hover:border-yellow-400 transition-all flex flex-col items-center justify-center gap-4 group animate-fade-in"
-                      >
-                        <span className="text-6xl group-hover:scale-110 transition-transform">❓</span>
-                        <p className="text-xl whitespace-nowrap font-bold text-gray-500 group-hover:text-yellow-600">点击此处，揭晓本段规律</p>
-                      </div>
-                    )}
-                  </div>
+                {/* 这里的提示文字增强视觉引导 */}
+                <div className="p-6 text-center text-gray-400 italic font-medium leading-relaxed">
+                  提示：逐步点击“下一步”来发现停车费的阶梯规律
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
